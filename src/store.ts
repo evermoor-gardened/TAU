@@ -35,13 +35,13 @@ class AgentStore extends EventTarget {
   ];
 
   private _logs: Log[] = [
-    { id: '1', timestamp: new Date().toLocaleTimeString(), level: 'info', source: 'System', message: 'Kernel initialized.' }
+    { id: '0', timestamp: new Date().toLocaleTimeString(), level: 'info', source: 'AESOP', message: 'Protocol 0x4145534F50 Initialized. Anchor: The Herdsman’s Field.' }
   ];
 
   get agents() { return this._agents; }
   get logs() { return this._logs; }
 
-  addLog(message: string, level: Log['level'] = 'info', source = 'System') {
+  addLog(message: string, level: Log['level'] = 'info', source = 'AESOP') {
     const log: Log = {
       id: Math.random().toString(36).substr(2, 9),
       timestamp: new Date().toLocaleTimeString(),
@@ -54,7 +54,7 @@ class AgentStore extends EventTarget {
   }
 
   async runCommand(command: string) {
-    this.addLog(`Running: ${command}`, 'info', 'User');
+    this.addLog(`AESOP Input: ${command}`, 'info', 'User');
     
     if (command.startsWith('ask ')) {
       const prompt = command.substring(4);
@@ -65,9 +65,11 @@ class AgentStore extends EventTarget {
         // Error logged in askGemini
       }
     } else if (command === 'status') {
-      this.addLog(`System: ${this._agents.length} agents online.`, 'info', 'System');
+      this.addLog(`AESOP Diagnostics: L-01 Homeostasis Stable. ${this._agents.length} nodes active.`, 'info', 'AESOP');
+    } else if (command === 'protocol') {
+      this.addLog(`Directive: Ethics is a biological constraint.`, 'info', 'AESOP');
     } else {
-      this.addLog(`Unknown command: ${command}`, 'warn', 'System');
+      this.addLog(`AESOP Warning: Unrecognized pattern "${command}"`, 'warn', 'AESOP');
     }
   }
 

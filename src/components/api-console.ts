@@ -26,7 +26,7 @@ export class ApiConsole extends LitElement {
     .level-info { color: #10b981; }
     .level-warn { color: #f59e0b; }
     .level-error { color: #ef4444; }
-    .source { color: #60a5fa; margin-right: 0.5rem; font-weight: bold; }
+    .source { color: #d946ef; margin-right: 0.5rem; font-weight: bold; }
     .cursor { display: inline-block; width: 0.6em; height: 1.2em; background: #e5e7eb; animation: blink 1s step-end infinite; vertical-align: middle; }
     @keyframes blink { 50% { opacity: 0; } }
   `;
@@ -41,6 +41,9 @@ export class ApiConsole extends LitElement {
   render() {
     return html`
       <div class="terminal">
+        <div style="color: #6b7280; margin-bottom: 1rem; border-bottom: 1px solid #1f2937; padding-bottom: 0.5rem;">
+          AESOP-OS v1.0 | Protocol Identity: 0x4145534F50 | The Herdsman’s Field
+        </div>
         ${this.logs.map(log => html`
           <div class="log-entry">
             <span class="timestamp">[${log.timestamp}]</span>
@@ -50,13 +53,13 @@ export class ApiConsole extends LitElement {
           </div>
         `)}
         <div style="margin-top: 0.5rem; display: flex; align-items: center;">
-          <span class="source">System</span>
+          <span class="source">AESOP</span>
           <span style="color: #10b981; margin-right: 0.5rem;">➜</span>
           <input 
             type="text" 
             style="background: transparent; border: none; color: #e5e7eb; outline: none; flex: 1; font-family: inherit;"
             @keydown="${this._handleKeyDown}"
-            placeholder="Type 'ask <prompt>' to talk to Gemini..."
+            placeholder="Awaiting Directive..."
           />
           <span class="cursor"></span>
         </div>

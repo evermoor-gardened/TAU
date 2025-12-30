@@ -34,7 +34,12 @@ export class AppRoot extends LitElement {
 
       <main class="container mx-auto px-4 py-8 space-y-12">
         <section>
-          <h1 class="text-3xl font-bold text-gray-800 mb-6">Agent Workspace</h1>
+          <div class="flex items-center justify-between mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Agent Workspace</h1>
+            <div class="text-xs font-mono text-gray-400 bg-gray-100 px-3 py-1 rounded-full">
+              PROTOCOL: 0x4145534F50 // ACTIVE
+            </div>
+          </div>
 
           <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             ${this.agents.map(agent => html`
