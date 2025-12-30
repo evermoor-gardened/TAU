@@ -3,17 +3,10 @@ import { customElement, property } from 'lit/decorators.js';
 
 @customElement('agent-card')
 export class AgentCard extends LitElement {
-  static properties = {
-    name: { type: String },
-    status: { type: String },
-    lastActive: { type: String, attribute: 'last-active' },
-    avatar: { type: String }
-  };
-
-  name = '';
-  status = 'offline';
-  lastActive = '';
-  avatar = '';
+  @property({ type: String }) name = '';
+  @property({ type: String }) status = 'offline';
+  @property({ type: String, attribute: 'last-active' }) lastActive = '';
+  @property({ type: String }) avatar = '';
 
   static styles = css`
     :host {
