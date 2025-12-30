@@ -53,6 +53,24 @@ class AgentStore extends EventTarget {
     this.dispatchEvent(new CustomEvent('change'));
   }
 
+  async runCommand(command: string) {
+    this.addLog(`Running: ${command}`, 'info', 'User');
+    
+    if (command.startsWith('ask ')) {
+      const prompt = command.substring(4);
+      try {
+        const { askGemini } = await import('./integrations/gemini');
+        await askGemini(prompt);
+      } catch (e) {
+        // Error logged in askGemini
+      }
+    } else if (command === 'status') {
+      this.addLog(`System: ${this._agents.length} agents online.`, 'info', 'System');
+    } else {
+      this.addLog(`Unknown command: ${command}`, 'warn', 'System');
+    }
+  }
+
   updateAgentStatus(id: string, status: AgentStatus) {
     this._agents = this._agents.map(a => 
       a.id === id ? { ...a, status, lastActive: 'Just now' } : a

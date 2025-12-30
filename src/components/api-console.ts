@@ -49,10 +49,29 @@ export class ApiConsole extends LitElement {
             <span class="message">${log.message}</span>
           </div>
         `)}
-        <div style="margin-top: 0.5rem;">
-          <span class="source">System</span> Waiting for command...<span class="cursor"></span>
+        <div style="margin-top: 0.5rem; display: flex; align-items: center;">
+          <span class="source">System</span>
+          <span style="color: #10b981; margin-right: 0.5rem;">➜</span>
+          <input 
+            type="text" 
+            style="background: transparent; border: none; color: #e5e7eb; outline: none; flex: 1; font-family: inherit;"
+            @keydown="${this._handleKeyDown}"
+            placeholder="Type 'ask <prompt>' to talk to Gemini..."
+          />
+          <span class="cursor"></span>
         </div>
       </div>
     `;
+  }
+
+  private _handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Enter') {
+      const input = e.target as HTMLInputElement;
+      const command = input.value.trim();
+      if (command) {
+        store.runCommand(command);
+        input.value = '';
+      }
+    }
   }
 }
