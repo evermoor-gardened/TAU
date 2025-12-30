@@ -8,7 +8,11 @@ import './components/api-console';
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
-  @state() private agents = store.agents;
+  static properties = {
+    agents: { type: Array, state: true }
+  };
+
+  private agents = store.agents;
 
   connectedCallback() {
     super.connectedCallback();

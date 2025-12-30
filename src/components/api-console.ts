@@ -4,7 +4,11 @@ import { store } from '../store';
 
 @customElement('api-console')
 export class ApiConsole extends LitElement {
-  @state() private logs = store.logs;
+  static properties = {
+    logs: { type: Array, state: true }
+  };
+
+  private logs = store.logs;
 
   static styles = css`
     :host {
